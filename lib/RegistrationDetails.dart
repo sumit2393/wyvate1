@@ -22,12 +22,16 @@ const kGoogleApiKey = "AIzaSyAaFQMkUP9m_gO-w8qNtFGJ5V0JJKpMVZ8";
 // to get places detail (lat/lng)
 GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: kGoogleApiKey);
 
-class BusinessDetail extends StatefulWidget {
+class RegistrationDetails extends StatefulWidget {
+  String UID;
+
+  RegistrationDetails({this.UID});
+
   @override
-  _BusinessDetailState createState() => _BusinessDetailState();
+  _RegistrationDetailsState createState() => _RegistrationDetailsState();
 }
 
-class _BusinessDetailState extends State<BusinessDetail> {
+class _RegistrationDetailsState extends State<RegistrationDetails> {
   ProgressDialog pr;
   GlobalKey<ScaffoldState> _scaffoldKey;
   final _formKey = GlobalKey<FormState>();
@@ -117,7 +121,7 @@ class _BusinessDetailState extends State<BusinessDetail> {
   AddBasicDetails() async {
     pr.show();
     final DatabaseReference database =  await FirebaseDatabase.instance.reference().child('BasicDetails');
-    database.push().set({
+    database.child(widget.UID).set({
       "Business_Name": businessName.text,
       "Merchant_Email": merchantEmail.text,
       "Merchant_Address": merchantAddress.text,
@@ -442,10 +446,7 @@ class _BusinessDetailState extends State<BusinessDetail> {
                   });
 
                   pr.show();
-                  String key1 =  await FirebaseDatabase.instance.reference().child('BasicDetails').push().key;
-                  String key = key1.replaceFirst("-", "");
-                  print("key: "+key);
-                  await FirebaseDatabase.instance.reference().child('BasicDetails').child(key).update({
+                  await FirebaseDatabase.instance.reference().child('BasicDetails').child(widget.UID).update({
                     "Business_Name": BusinessName,
                     "Merchant_Email": MerchantEmail,
                     "Merchant_Address":MerchantAddress,
@@ -459,21 +460,21 @@ class _BusinessDetailState extends State<BusinessDetail> {
                     pr.hide();
                     ShowSuccessAlert();
                     print('inserted');
-                      SharedPreferences prefs = await SharedPreferences.getInstance();
-                      prefs.setString('Business_Name', BusinessName);
+                    SharedPreferences prefs = await SharedPreferences.getInstance();
+                    prefs.setString('Business_Name', BusinessName);
                     prefs.setString('Merchant_Email', MerchantEmail);
                     prefs.setString('Merchant_Address', MerchantAddress);
                     prefs.setString('Merchant_Contact', contactNumber);
                     prefs.setString('City', City);
                     prefs.setString('State', States);
                     prefs.setString('Pincode', Pin);
-                  //  prefs.setString('Status', Inactive);
-                      prefs.setString('userId', key );
+                //  prefs.setString('Status', Inactive);
+                    prefs.setString('userId', widget.UID );
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => ProfileApp(
-                            UID: key,
+                            UID: widget.UID,
                           ),
                         ));
                   }).catchError((error) {
