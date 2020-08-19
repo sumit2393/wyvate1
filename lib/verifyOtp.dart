@@ -29,7 +29,6 @@ class _verifyOtpState extends State<verifyOtp> {
   /// Decorate the outside of the Pin.
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _onVerifyCode();
   }

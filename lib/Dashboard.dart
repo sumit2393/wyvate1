@@ -1,9 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wyvate1/Profile.dart';
-import 'package:wyvate1/calender.dart';
-import 'package:wyvate1/calenders.dart';
 import 'main.dart';
+import 'WorkersListScreen.dart';
 
 class Dashboard extends StatefulWidget {
   Dashboard({this.UID});
@@ -14,7 +13,6 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   bool isLoading = true;
-  int _currentIndex = 0;
   var scaffoldKey = GlobalKey<ScaffoldState>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -24,8 +22,7 @@ class _DashboardState extends State<Dashboard> {
   }
 
   void inputData() async {
-    final FirebaseUser User =
-        await _auth.currentUser().then((FirebaseUser user) {
+    await _auth.currentUser().then((FirebaseUser user) {
       if (user != null) {
         setState(() {
           uid = user.uid;
@@ -40,7 +37,7 @@ class _DashboardState extends State<Dashboard> {
     // here you write the codes to input the data into firestore
   }
 
-  int _selectedIndex = 3;
+  int _selectedIndex = 2;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -51,14 +48,10 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     final tabs = [
-      Center(
-        child: Text('screen1'),
-
-      ),
+      WorkersListScreen(),
       Center(
         child: Text('screen2'),
       ),
-      Calender(),
 
       ProfileApp(),
     ];
@@ -70,10 +63,10 @@ class _DashboardState extends State<Dashboard> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.home,
+              Icons.calendar_today,
               color: Colors.green,
             ),
-            title: Text('Home'),
+            title: Text('Calendar'),
           ),
           BottomNavigationBarItem(
             icon: Icon(
@@ -83,13 +76,10 @@ class _DashboardState extends State<Dashboard> {
             title: Text('Sales'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today, color: Colors.green),
-            title: Text(
-              'Calender',
+            icon: Icon(
+                Icons.dashboard,
+                color: Colors.green
             ),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard, color: Colors.green),
             title: Text('More'),
           ),
         ],

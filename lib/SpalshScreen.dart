@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
           uid = user.uid;
         });
 
-        checkActiveState(uid);
+        checkActiveState(user.uid);
 
       } else {
         Navigator.pushReplacementNamed(context, '/login');
@@ -88,13 +88,13 @@ class _SplashScreenState extends State<SplashScreen> {
             print('Activated Account');
 
             SharedPreferences prefs = await SharedPreferences.getInstance();
-            prefs.setString('Business_Name', value['Business_Name']);
-            prefs.setString('Merchant_Email', value['Merchant_Email']);
-            prefs.setString('Merchant_Address', value['Merchant_Address']);
-            prefs.setString('Merchant_Contact', value['Merchant_Contact']);
-            prefs.setString('City', value['City']);
-            prefs.setString('State', value['State']);
-            prefs.setString('Pincode', value['Pincode']);
+            prefs.setString('Business_Name', values['Business_Name']);
+            prefs.setString('Merchant_Email', values['Merchant_Email']);
+            prefs.setString('Merchant_Address', values['Merchant_Address']);
+            prefs.setString('Merchant_Contact', values['Merchant_Contact']);
+            prefs.setString('City', values['City']);
+            prefs.setString('State', values['State']);
+            prefs.setString('Pincode', values['Pincode']);
             prefs.setString('userId', uid );
 
             Navigator.pushReplacementNamed(context, '/Dashboard');
