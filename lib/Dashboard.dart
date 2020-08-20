@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:wyvate1/Profile.dart';
+import 'package:wyvate1/ProfileScreen.dart';
 import 'main.dart';
 import 'WorkersListScreen.dart';
 
@@ -53,7 +53,7 @@ class _DashboardState extends State<Dashboard> {
         child: Text('screen2'),
       ),
 
-      ProfileApp(),
+      ProfileScreen(),
     ];
 
     return Scaffold(

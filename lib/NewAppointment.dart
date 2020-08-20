@@ -23,7 +23,7 @@ class _NewAppointmentState extends State<NewAppointment> {
     "Four",
     "Five"
   ];
-   final List<String > _repaeat=[
+   final List<String > _repeat=[
           "Repeat daily"
          "Repeat weekly"
    ];

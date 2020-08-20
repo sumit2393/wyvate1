@@ -27,6 +27,7 @@ class _ServicesState extends State<Services> with TickerProviderStateMixin {
   final editprice = TextEditingController();
   final editduration = TextEditingController();
   TextStyle tabStyle = TextStyle(fontSize: 16);
+
   @override
   void initState() {
     super.initState();
@@ -193,8 +194,7 @@ class _ServicesState extends State<Services> with TickerProviderStateMixin {
               print(' categories id is ${values["category_id"]}');
             });
 
-            tabController = TabController(
-                length: lists.length, vsync: this, initialIndex: 0);
+            tabController = TabController(length: lists.length, vsync: this, initialIndex: 0);
 
             return tabCreate();
           } else {
@@ -430,6 +430,7 @@ class _ServicesState extends State<Services> with TickerProviderStateMixin {
           ),
         ],
       );
+
   Future<bool> _onBackPressed() {
     Navigator.pushReplacementNamed(context, '/Dashboard');
   }

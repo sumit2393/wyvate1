@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'main.dart';
 
-class ProfileApp extends StatefulWidget {
-  ProfileApp({this.UID});
+class ProfileScreen extends StatefulWidget {
+  ProfileScreen({this.UID});
   String UID;
   @override
-  _ProfileAppState createState() => _ProfileAppState();
+  _ProfileScreenState createState() => _ProfileScreenState();
 }
 
-class _ProfileAppState extends State<ProfileApp> {
+class _ProfileScreenState extends State<ProfileScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   String StoreName = "";
   String Address = "";
@@ -21,10 +21,10 @@ class _ProfileAppState extends State<ProfileApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getprofileData();
+    getProfileData();
   }
 
-  getprofileData() async {
+  getProfileData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String store_name = prefs.getString("Business_Name")??"";
     String address = prefs.getString("Merchant_Address")??"";
@@ -50,7 +50,9 @@ class _ProfileAppState extends State<ProfileApp> {
             style: TextStyle(
                 fontSize: 20, fontFamily: "OpenSans Bold", color: Colors.white),
           ),
+          leading: Container(),
           backgroundColor: Color.fromRGBO(88, 187, 71, 1),
+          centerTitle: true,
           actions: [
             IconButton(
               icon: Icon(
@@ -60,7 +62,8 @@ class _ProfileAppState extends State<ProfileApp> {
                 _logOut();
               },
             ),
-          ]),
+          ]
+      ),
       body: SafeArea(
         child: Container(
           child: SingleChildScrollView(

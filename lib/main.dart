@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wyvate1/AddWorker.dart';
 import 'package:wyvate1/Dashboard.dart';
-import 'package:wyvate1/Profile.dart';
+import 'package:wyvate1/ProfileScreen.dart';
 import 'package:wyvate1/RegistrationDetails.dart';
 import 'package:wyvate1/Services.dart';
 import 'package:wyvate1/TimeSchedule.dart';
-import 'package:wyvate1/Worker.dart';
+import 'package:wyvate1/Workers.dart';
 
 import 'package:wyvate1/constants/constants.dart';
 import 'package:wyvate1/editProfile.dart';
@@ -69,7 +69,7 @@ class MyApp extends StatelessWidget {
         '/Workers': (context) => Workers(
               UID: uid,
             ),
-        '/profile': (context) => ProfileApp(
+        '/profile': (context) => ProfileScreen(
               UID: uid,
             ),
         '/EditWorker': (context) => EditWorker(

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wyvate1/calender.dart';
 
 class WorkersListScreen extends StatefulWidget {
   @override
@@ -22,11 +23,11 @@ class _WorkersListScreenState extends State<WorkersListScreen> {
     return true;
   }
 
-  Stream<dynamic> _workersFuture;
+  Stream<Event> _workersFuture;
   @override
   void initState() {
     getSharedPrefs().then((value) async {
-      _workersFuture = await FirebaseDatabase.instance.reference().child("Workers").child(userId).onValue;
+      _workersFuture = FirebaseDatabase.instance.reference().child("Workers").child(userId).onValue;
     });
 
     super.initState();
@@ -39,32 +40,36 @@ class _WorkersListScreenState extends State<WorkersListScreen> {
       appBar: AppBar(
         title: Text(
           'Select Worker',
-          style: TextStyle(
-              fontSize: 20, fontFamily: "OpenSans Bold", color: Colors.white),
+          style: TextStyle(fontSize: 20, fontFamily: "OpenSans Bold", color: Colors.white),
         ),
+        leading: Container(),
         backgroundColor: Color.fromRGBO(88, 187, 71, 1),
+        centerTitle: true,
       ),
       body: StreamBuilder(
         stream: _workersFuture,
         builder: (context, snapshot) {
           if(snapshot.hasData) {
             Map<dynamic, dynamic> map = snapshot.data.snapshot.value;
+            print("map: "+map.toString());
+            print("map.length: "+map.length.toString());
 
             return ListView.builder(
-              itemCount: map.values.toList().length,
+              itemCount: map.length,
               padding: EdgeInsets.all(2.0),
               itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  child: Image.network(
-                    map.values.toList()[index]["Worker_Name"],
-                    fit: BoxFit.cover,
-                  ),
-                  padding: EdgeInsets.all(2.0),
+
+                return ListTile(
+                  title: Text(map.values.toList()[index]["Worker_Name"]),
+                  onTap: (){
+                     Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> Calender()));
+                  },
                 );
               },
             );
+
           } else {
-            return CircularProgressIndicator();
+            return Center(child: CircularProgressIndicator());
           }
         },
       ),

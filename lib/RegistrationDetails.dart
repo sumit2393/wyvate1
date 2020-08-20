@@ -12,7 +12,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:wyvate1/Dashboard.dart';
 import 'package:wyvate1/OtpScreen.dart';
-import 'package:wyvate1/Profile.dart';
+import 'package:wyvate1/ProfileScreen.dart';
 import 'package:wyvate1/verifyOtp.dart';
 
 import 'constants/constants.dart';
@@ -473,7 +473,7 @@ class _RegistrationDetailsState extends State<RegistrationDetails> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ProfileApp(
+                          builder: (context) => ProfileScreen(
                             UID: widget.UID,
                           ),
                         ));
