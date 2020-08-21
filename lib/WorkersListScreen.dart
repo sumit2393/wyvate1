@@ -38,7 +38,7 @@ class _WorkersListScreenState extends State<WorkersListScreen> {
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text(
-          'Select Worker',
+          'Booking Schedule',
           style: TextStyle(fontSize: 20, fontFamily: "OpenSans Bold", color: Colors.white),
         ),
         leading: Container(),
@@ -76,6 +76,8 @@ class _WorkersListScreenState extends State<WorkersListScreen> {
               },
             );
 
+          } else if(snapshot.hasError){
+            return Center(child: Text("No staffs found"));
           } else {
             return Center(child: CircularProgressIndicator());
           }

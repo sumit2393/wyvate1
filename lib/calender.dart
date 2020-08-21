@@ -47,25 +47,27 @@ class _CalenderState extends State<Calender> {
 
         print("dataSnapshot: "+dataSnapshot.value.toString());
 
-        eventsList = new List();
-        eventsList.add(new BasicEvent(
-          id: 0,
-          title: 'Some Event',
-          color: Colors.blue,
-          start: LocalDate.today().at(LocalTime(18, 0, 0)),
-          end: LocalDate.today().at(LocalTime(23, 10, 0)),
-        ),);
-        myEventProvider = EventProvider.list(eventsList);
 
-        _controller = TimetableController(
-          eventProvider: myEventProvider,
-          initialDate: LocalDate.dateTime(_dateTime),
-          visibleRange: VisibleRange.days(1),
-          firstDayOfWeek: DayOfWeek.monday,
-        );
 
       });
     });
+
+    eventsList = new List();
+    eventsList.add(new BasicEvent(
+      id: 0,
+      title: 'Some Event',
+      color: Colors.blue,
+      start: LocalDate.today().at(LocalTime(18, 0, 0)),
+      end: LocalDate.today().at(LocalTime(23, 10, 0)),
+    ),);
+    myEventProvider = EventProvider.list(eventsList);
+
+    _controller = TimetableController(
+      eventProvider: myEventProvider,
+      initialDate: LocalDate.dateTime(_dateTime),
+      visibleRange: VisibleRange.days(1),
+      firstDayOfWeek: DayOfWeek.monday,
+    );
 
   }
 
