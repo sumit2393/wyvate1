@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -62,7 +61,16 @@ class _WorkersListScreenState extends State<WorkersListScreen> {
                 return ListTile(
                   title: Text(map.values.toList()[index]["Worker_Name"]),
                   onTap: (){
-                     Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> Calender()));
+
+                     Navigator.of(context).push(
+                         new MaterialPageRoute(
+                             builder: (context)=> Calender(
+                               worker_name: map.values.toList()[index]["Worker_Name"],
+                               worker_id: map.values.toList()[index].toString()
+                             )
+                         )
+                     );
+
                   },
                 );
               },
